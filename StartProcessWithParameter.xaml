@@ -4,7 +4,7 @@
     <x:Property Name="in_id" Type="InArgument(x:String)" />
     <x:Property Name="in_releaseKey" Type="InArgument(x:String)" />
     <x:Property Name="in_inputArguments" Type="InArgument(x:String)" />
-    <x:Property Name="out_idProcess" Type="InArgument(x:String)" />
+    <x:Property Name="out_idProcess" Type="OutArgument(x:String)" />
   </x:Members>
   <this:StartProcessWithParameters.in_token>
     <InArgument x:TypeArguments="x:String" />
@@ -18,9 +18,6 @@
   <this:StartProcessWithParameters.in_inputArguments>
     <InArgument x:TypeArguments="x:String" />
   </this:StartProcessWithParameters.in_inputArguments>
-  <this:StartProcessWithParameters.out_idProcess>
-    <InArgument x:TypeArguments="x:String" />
-  </this:StartProcessWithParameters.out_idProcess>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
@@ -188,7 +185,7 @@
               <OutArgument x:TypeArguments="x:String">[out_idProcess]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[responseJSON.SelectToken("Key").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String">[responseJSON.SelectToken("Id").ToString]</InArgument>
             </Assign.Value>
           </Assign>
         </Sequence>
