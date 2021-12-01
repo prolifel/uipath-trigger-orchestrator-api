@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1389,1384" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1328,1710" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="39">
       <x:String>System.Activities</x:String>
@@ -77,41 +77,110 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="376,1319" sap2010:WorkflowViewState.IdRef="Sequence_8">
+  <Sequence sap:VirtualizedContainerService.HintSize="473,1645" sap2010:WorkflowViewState.IdRef="Sequence_8">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="token" />
-      <Variable x:TypeArguments="x:String" Name="filtersDisplayName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">DisplayName eq 'API-Test'</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Name="filtersDisplayName" />
       <Variable x:TypeArguments="x:String" Name="id" />
-      <Variable x:TypeArguments="x:String" Name="filterName">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">Name eq 'UnattandedTesting'</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Name="filterName" />
       <Variable x:TypeArguments="x:String" Name="releaseKey" />
       <Variable x:TypeArguments="njl:JObject" Name="inputArgumentsJSON" />
       <Variable x:TypeArguments="x:String" Name="idProcess" />
       <Variable x:TypeArguments="x:String" Name="filterIdProcess" />
       <Variable x:TypeArguments="x:String" Name="state" />
+      <Variable x:TypeArguments="x:String" Name="grantType" />
+      <Variable x:TypeArguments="x:String" Name="oAuthClientId" />
+      <Variable x:TypeArguments="x:String" Name="oAuthClientSecret" />
+      <Variable x:TypeArguments="x:String" Name="scopes" />
+      <Variable x:TypeArguments="x:String" Name="endpoint" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetAccessToken workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetAccessToken.xaml">
+    <ui:MultipleAssign DisplayName="Assign prerequisite variables" sap:VirtualizedContainerService.HintSize="431,286" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[filtersDisplayName]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">DisplayName eq 'API-Test'</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[filterName]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">Name eq 'UnattandedTesting'</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[grantType]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">client_credentials</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[oAuthClientId]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">70f1a4e1-570a-494d-a45d-433d0f94c3f9</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[oAuthClientSecret]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">(aSlKyA#AD45jQ1K</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[scopes]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">OR.Assets OR.Execution OR.Folders OR.Jobs OR.Machines OR.Queues OR.Robots OR.Tasks</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[endpoint]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">https://cloud.uipath.com/eutedpw/API</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetAccessToken workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetAccessToken.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_token">[token]</OutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_grant_type">client_credentials</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_oAuthClientId">70f1a4e1-570a-494d-a45d-433d0f94c3f9</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_oAuthClientSecret">(aSlKyA#AD45jQ1K</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_scopes">OR.Assets OR.Execution OR.Folders OR.Jobs OR.Machines OR.Queues OR.Robots OR.Tasks</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_token">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="token" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_grant_type">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="grantType" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_oAuthClientId">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="oAuthClientId" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_oAuthClientSecret">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="oAuthClientSecret" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_scopes">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="scopes" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[filtersDisplayName]</OutArgument>
       </Assign.To>
@@ -119,7 +188,7 @@
         <InArgument x:TypeArguments="x:String">[HttpUtility.UrlEncode(filtersDisplayName)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetFolderIdbyName workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GetFolderIdbyName.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetFolderIdbyName workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GetFolderIdbyName.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_token">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="token" />
@@ -130,9 +199,12 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_id">
           <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="id" />
         </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_endpoint">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="endpoint" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[filterName]</OutArgument>
       </Assign.To>
@@ -140,7 +212,7 @@
         <InArgument x:TypeArguments="x:String">[HttpUtility.UrlEncode(filterName)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetReleaseKeybyName workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="GetReleaseKeybyName.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetReleaseKeybyName workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="GetReleaseKeybyName.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_token">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="token" />
@@ -154,10 +226,13 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_key">
           <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="releaseKey" />
         </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_endpoint">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="endpoint" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Read inputArguments form JSON" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[inputArgumentsJSON]" JsonString="[System.IO.File.ReadAllText(&quot;inputArguments.json&quot;)]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke StartProcessWithParameter workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="StartProcessWithParameter.xaml">
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Read inputArguments form JSON" sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[inputArgumentsJSON]" JsonString="[System.IO.File.ReadAllText(&quot;inputArguments.json&quot;)]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke StartProcessWithParameter workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="StartProcessWithParameter.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_token">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="token" />
@@ -174,9 +249,12 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_idProcess">
           <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="idProcess" />
         </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_endpoint">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="endpoint" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[filterIdProcess]</OutArgument>
       </Assign.To>
@@ -184,7 +262,7 @@
         <InArgument x:TypeArguments="x:String">[HttpUtility.UrlEncode("Id eq " + idProcess)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetJobState workflow" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="GetJobState.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetJobState workflow" sap:VirtualizedContainerService.HintSize="431,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="GetJobState.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_token">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="token" />
@@ -198,8 +276,11 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_state">
           <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="state" />
         </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_endpoint">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="endpoint" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_11" Text="[state]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="431,62" sap2010:WorkflowViewState.IdRef="WriteLine_11" Text="[state]" />
   </Sequence>
 </Activity>

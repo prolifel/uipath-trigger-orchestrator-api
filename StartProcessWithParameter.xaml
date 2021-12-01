@@ -5,6 +5,7 @@
     <x:Property Name="in_releaseKey" Type="InArgument(x:String)" />
     <x:Property Name="in_inputArguments" Type="InArgument(x:String)" />
     <x:Property Name="out_idProcess" Type="OutArgument(x:String)" />
+    <x:Property Name="in_endpoint" Type="InArgument(x:String)" />
   </x:Members>
   <this:StartProcessWithParameters.in_token>
     <InArgument x:TypeArguments="x:String" />
@@ -18,10 +19,13 @@
   <this:StartProcessWithParameters.in_inputArguments>
     <InArgument x:TypeArguments="x:String" />
   </this:StartProcessWithParameters.in_inputArguments>
+  <this:StartProcessWithParameters.in_endpoint>
+    <InArgument x:TypeArguments="x:String" />
+  </this:StartProcessWithParameters.in_endpoint>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1389,1335</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1328,1335</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>StartProcessWithParameters_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -87,12 +91,12 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.Web</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StartProcessWithParameter" sap:VirtualizedContainerService.HintSize="936,1270" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -107,20 +111,14 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="894,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;4. Start Process - With Parameter started&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="io_body = new JObject();&#xD;&#xA;JObject innerObject = new JObject();&#xD;&#xA;&#xD;&#xA;innerObject[&quot;ReleaseKey&quot;] = in_releaseKeyInvoke;&#xD;&#xA;innerObject[&quot;Strategy&quot;] = &quot;ModernJobsCount&quot;;&#xD;&#xA;innerObject[&quot;JobsCount&quot;] = 1;&#xD;&#xA;innerObject[&quot;InputArguments&quot;] = in_inputArgumentsInvoke;&#xD;&#xA;&#xD;&#xA;io_body[&quot;startInfo&quot;] = innerObject;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="894,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="io_body = new JObject();&#xA;JObject innerObject = new JObject();&#xA;&#xA;innerObject[&quot;ReleaseKey&quot;] = in_releaseKeyInvoke;&#xA;innerObject[&quot;Strategy&quot;] = &quot;ModernJobsCount&quot;;&#xA;innerObject[&quot;JobsCount&quot;] = 1;&#xA;innerObject[&quot;InputArguments&quot;] = in_inputArgumentsInvoke;&#xA;&#xA;io_body[&quot;startInfo&quot;] = innerObject;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="894,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
       <ui:InvokeCode.Arguments>
-        <InOutArgument x:TypeArguments="njl:JObject" x:Key="io_body">
-          <mva:VisualBasicReference x:TypeArguments="njl:JObject" ExpressionText="body" />
-        </InOutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_releaseKeyInvoke">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_releaseKey" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_inputArgumentsInvoke">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_inputArguments" />
-        </InArgument>
+        <InOutArgument x:TypeArguments="njl:JObject" x:Key="io_body">[body]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_releaseKeyInvoke">[in_releaseKey]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_inputArgumentsInvoke">[in_inputArguments]</InArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" Body="[body.ToString(Newtonsoft.Json.Formatting.Indented)]" BodyFormat="application/json" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="https://cloud.uipath.com/eutedpw/API/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs" sap:VirtualizedContainerService.HintSize="894,22" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[response]" StatusCode="[statusCode]" TimeoutMS="6000">
+    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" Body="[body.ToString(Newtonsoft.Json.Formatting.Indented)]" BodyFormat="application/json" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_endpoint + &quot;/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs&quot;]" sap:VirtualizedContainerService.HintSize="894,22" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[response]" StatusCode="[statusCode]" TimeoutMS="6000">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -128,12 +126,8 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Cookies>
       <ui:HttpClient.Headers>
-        <InArgument x:TypeArguments="x:String" x:Key="Authorization">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Bearer &quot; + in_token" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_id" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + in_token]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">[in_id]</InArgument>
       </ui:HttpClient.Headers>
       <ui:HttpClient.Parameters>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />

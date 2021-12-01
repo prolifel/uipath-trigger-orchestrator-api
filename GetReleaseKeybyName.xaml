@@ -4,6 +4,7 @@
     <x:Property Name="in_id" Type="InArgument(x:String)" />
     <x:Property Name="in_filter" Type="InArgument(x:String)" />
     <x:Property Name="out_key" Type="OutArgument(x:String)" />
+    <x:Property Name="in_endpoint" Type="InArgument(x:String)" />
   </x:Members>
   <this:GetReleaseKeybyName.in_token>
     <InArgument x:TypeArguments="x:String" />
@@ -14,10 +15,13 @@
   <this:GetReleaseKeybyName.in_filter>
     <InArgument x:TypeArguments="x:String" />
   </this:GetReleaseKeybyName.in_filter>
+  <this:GetReleaseKeybyName.in_endpoint>
+    <InArgument x:TypeArguments="x:String" />
+  </this:GetReleaseKeybyName.in_endpoint>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1389,1131</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1328,1131</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetReleaseKeybyName_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -82,12 +86,12 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.Web</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="GetReleaseKeybyName" sap:VirtualizedContainerService.HintSize="936,1066" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -101,7 +105,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="894,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;2. Get Release Key by Name started&quot;]" />
-    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" BodyFormat="application/xml" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="https://cloud.uipath.com/eutedpw/API/odata/Releases" sap:VirtualizedContainerService.HintSize="894,22" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="6000">
+    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="ANY" BodyFormat="application/xml" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_endpoint + &quot;/odata/Releases&quot;]" sap:VirtualizedContainerService.HintSize="894,22" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[response]" StatusCode="[statusCode]" TimeoutMS="6000">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -109,17 +113,11 @@
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Cookies>
       <ui:HttpClient.Headers>
-        <InArgument x:TypeArguments="x:String" x:Key="Authorization">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="&quot;Bearer &quot; + in_token" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_id" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + in_token]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="X-UIPATH-OrganizationUnitId">[in_id]</InArgument>
       </ui:HttpClient.Headers>
       <ui:HttpClient.Parameters>
-        <InArgument x:TypeArguments="x:String" x:Key="$filter">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_filter" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="$filter">[in_filter]</InArgument>
       </ui:HttpClient.Parameters>
       <ui:HttpClient.UrlSegments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
